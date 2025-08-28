@@ -6,7 +6,7 @@ import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Skill from "./Pages/Service"
 import Contact from "./Pages/Contact";
-import Projects from "./Pages/ProjectS";
+import Projects from "./Pages/Projects";
 import "./styles/global.css";
 
 export default function App() {
