@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Contact() {
+const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -67,14 +67,14 @@ export default function Contact() {
       {/* Status Messages */}
       {submitStatus === "success" && (
         <div style={styles.successMessage}>
-          <i className="fas fa-check-circle" style={styles.icon}></i>
+          <i className="icon" style={styles.icon}>✅</i>
           Message sent successfully! I'll get back to you soon.
         </div>
       )}
       
       {submitStatus === "error" && (
         <div style={styles.errorMessage}>
-          <i className="fas fa-exclamation-circle" style={styles.icon}></i>
+          <i className="icon" style={styles.icon}>❌</i>
           Failed to send message. Please try again or contact me directly.
           {errorDetails && <div style={styles.errorDetails}>Error: {errorDetails}</div>}
           <div style={styles.troubleshoot}>
@@ -100,7 +100,7 @@ export default function Contact() {
         <form style={styles.form} onSubmit={handleSubmit}>
           <div style={styles.formGroup}>
             <label htmlFor="name" style={styles.label}>
-              <i className="fas fa-user" style={styles.inputIcon}></i>
+              <i className="icon" style={styles.inputIcon}>👤</i>
               Full Name
             </label>
             <input
@@ -117,7 +117,7 @@ export default function Contact() {
 
           <div style={styles.formGroup}>
             <label htmlFor="email" style={styles.label}>
-              <i className="fas fa-envelope" style={styles.inputIcon}></i>
+              <i className="icon" style={styles.inputIcon}>📧</i>
               Email Address
             </label>
             <input
@@ -134,7 +134,7 @@ export default function Contact() {
 
           <div style={styles.formGroup}>
             <label htmlFor="message" style={styles.label}>
-              <i className="fas fa-comment" style={styles.inputIcon}></i>
+              <i className="icon" style={styles.inputIcon}>💬</i>
               Message
             </label>
             <textarea
@@ -156,12 +156,12 @@ export default function Contact() {
           >
             {isSubmitting ? (
               <>
-                <i className="fas fa-spinner fa-spin" style={styles.buttonIcon}></i>
+                <span style={styles.spinner}></span>
                 Sending...
               </>
             ) : (
               <>
-                <i className="fas fa-paper-plane" style={styles.buttonIcon}></i>
+                <i className="icon" style={styles.buttonIcon}>📤</i>
                 Send Message
               </>
             )}
@@ -172,29 +172,23 @@ export default function Contact() {
         <div style={styles.contactInfo}>
           <h3 style={styles.infoTitle}>Contact Information</h3>
           <div style={styles.contactItem}>
-            <span style={styles.contactIcon}>
-              <i className="fas fa-phone"></i>
-            </span>
+            <span style={styles.contactIcon}>📞</span>
             <a href="tel:+251954693265" style={styles.contactLink}>+251 954693265</a>
           </div>
           <div style={styles.contactItem}>
-            <span style={styles.contactIcon}>
-              <i className="fas fa-envelope"></i>
-            </span>
+            <span style={styles.contactIcon}>📧</span>
             <a href="mailto:yeabsiraaychiluhim2112@gmail.com" style={styles.contactLink}>
               yeabsiraaychiluhim2112@gmail.com
             </a>
           </div>
           <div style={styles.contactItem}>
-            <span style={styles.contactIcon}>
-              <i className="fas fa-map-marker-alt"></i>
-            </span>
+            <span style={styles.contactIcon}>🌍</span>
             <span>Addis Ababa, Ethiopia</span>
           </div>
           
           <div style={styles.telegramInfo}>
             <h4 style={styles.telegramTitle}>
-              <i className="fab fa-telegram" style={styles.telegramIcon}></i>
+              <span style={styles.telegramIcon}>📢</span>
               Telegram Integration
             </h4>
             <p style={styles.telegramText}>
@@ -206,7 +200,7 @@ export default function Contact() {
       </div>
     </div>
   );
-}
+};
 
 const styles = {
   container: {
@@ -261,7 +255,6 @@ const styles = {
   },
   inputIcon: {
     marginRight: "0.5rem",
-    color: "#3498db",
     width: "16px",
   },
   input: {
@@ -309,6 +302,15 @@ const styles = {
   buttonIcon: {
     marginRight: "0.5rem",
   },
+  spinner: {
+    width: "16px",
+    height: "16px",
+    border: "2px solid transparent",
+    borderTop: "2px solid white",
+    borderRadius: "50%",
+    marginRight: "8px",
+    animation: "spin 1s linear infinite",
+  },
   contactInfo: {
     flex: 1,
     minWidth: "250px",
@@ -338,7 +340,6 @@ const styles = {
   contactIcon: {
     marginRight: "12px",
     fontSize: "1.2rem",
-    color: "#3498db",
     width: "24px",
     textAlign: "center",
   },
@@ -421,7 +422,6 @@ const styles = {
   },
   telegramIcon: {
     marginRight: "0.5rem",
-    color: "#3498db",
     fontSize: "1.2rem",
   },
   telegramText: {
@@ -431,3 +431,15 @@ const styles = {
     color: "#4a6572",
   },
 };
+
+// Add keyframes for spinner animation
+const styleSheet = document.styleSheets[0];
+const keyframes = `
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+`;
+styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
+
+export default Contact;
