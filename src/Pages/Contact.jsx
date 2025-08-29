@@ -9,7 +9,7 @@ export default function Contact() {
   });
 
   // ✅ Your Telegram credentials
-  const BOT_TOKEN = "8492384030:AAFSJHcxgwkAtewTYZiDVU_1RDMNZuRUALk"; 
+  const BOT_TOKEN ="8492384030:AAFSJHcxgwkAtewTYZiDVU_1RDMNZuRUALk"; 
   const CHAT_ID = "7155450605"; // ✅ Your personal chat ID from userinfobot
 
   const handleChange = (e) => {
