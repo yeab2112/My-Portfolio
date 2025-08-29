@@ -1,7 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/contact.css";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  // ✅ Your Telegram credentials
+  const BOT_TOKEN = "8492384030:AAFSJHcxgwkAtewTYZiDVU_1RDMNZuRUALk"; 
+  const CHAT_ID = "7155450605"; // ✅ Your personal chat ID from userinfobot
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const text = `📩 New Contact Message:
+👤 Name: ${formData.name}
+📧 Email: ${formData.email}
+💬 Message: ${formData.message}`;
+
+    try {
+      await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: text,
+        }),
+      });
+
+      alert("✅ Message sent to Telegram!");
+      setFormData({ name: "", email: "", message: "" }); // reset form
+    } catch (error) {
+      alert("❌ Failed to send message. Please try again.");
+      console.error(error);
+    }
+  };
+
   return (
     <div className="contact-container">
       <h2 className="section-title">Get In Touch</h2>
@@ -11,10 +51,17 @@ export default function Contact() {
       </p>
 
       {/* Contact Form */}
-      <form className="contact-form">
+      <form className="contact-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Full Name</label>
-          <input type="text" id="name" placeholder="Enter your name" required />
+          <input
+            type="text"
+            id="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Enter your name"
+            required
+          />
         </div>
 
         <div className="form-group">
@@ -22,6 +69,8 @@ export default function Contact() {
           <input
             type="email"
             id="email"
+            value={formData.email}
+            onChange={handleChange}
             placeholder="Enter your email"
             required
           />
@@ -32,14 +81,14 @@ export default function Contact() {
           <textarea
             id="message"
             rows="5"
+            value={formData.message}
+            onChange={handleChange}
             placeholder="Write your message..."
             required
           ></textarea>
         </div>
 
-        <button type="submit" className="btn primary">
-          Send Message
-        </button>
+        <button type="submit" className="btn primary">Send Message</button>
       </form>
 
       {/* Contact Info */}
@@ -47,21 +96,6 @@ export default function Contact() {
         <p>📞 Phone: <a href="tel:+251954693265">0954693265</a></p>
         <p>📧 Email: <a href="mailto:yeabsiraaychiluhim2112@gmail.com">yeabsiraaychiluhim2112@gmail.com</a></p>
         <p>🌍 Location: Addis Ababa, Ethiopia</p>
-      </div>
-
-      {/* Quick Contact Buttons */}
-      <div className="quick-contact">
-        <a
-          href="https://t.me/yeabsiraA2112"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn telegram"
-        >
-          📩 Contact via Telegram
-        </a>
-
-<a href="sms:+251954693265">📱 Send SMS</a>
-        
       </div>
     </div>
   );
