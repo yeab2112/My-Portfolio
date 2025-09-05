@@ -8,6 +8,15 @@ export default function Home() {
     <div className="home-container">
       {/* Hero Section */}
       <section className="hero">
+        {/* Image on the left */}
+        <div className="hero-image">
+          <img
+            src={yeabsira}
+            alt="Yeabsira Profile"
+          />
+        </div>
+
+        {/* Text on the right */}
         <div className="hero-text">
           <h1>
             Hi, I'm <span className="highlight">Yeabsira</span>
@@ -25,13 +34,6 @@ export default function Home() {
             {/* Download CV button */}
             <a href={YEABSIRA2017CV} download className="btn secondary">Download CV</a>
           </div>
-        </div>
-
-        <div className="hero-image">
-          <img
-            src={yeabsira}
-            alt="Yeabsira Profile"
-          />
         </div>
       </section>
     </div>
